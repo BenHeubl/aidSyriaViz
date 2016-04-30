@@ -1,0 +1,278 @@
+
+<!DOCTYPE HTML>
+<meta charset="utf-8">
+<html>
+<head>
+
+<script src="js/jquery.min.js"></script>
+
+<script src="js/d3.min.js"></script>
+<link rel="stylesheet" href="http://cdn.static-economist.com/sites/all/themes/econfinal/styles/reset.css">
+<link type="text/css" rel="stylesheet" media="all" href="http://cdn.static-economist.com/sites/all/themes/econfinal/styles/ec-custom-fonts.css">
+
+
+<style>
+
+
+
+body, h1, h2, h3, p, table, td {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5em;
+  color: #000;
+}
+
+
+
+#content {
+  margin: 0px;
+  padding: 0px;
+  width: 595px;
+  text-align: left;
+}
+
+#container {
+  margin: 0px 0px 15px 0px;
+  padding: 0px;
+}
+
+#header h1 {
+  margin: 7px 0px 0px 20px;
+  padding: 0px;
+  font-family: Officina_bold, Calibri, Arial;
+  font-size: 17px;
+  font-weight: normal;
+  color: #000;
+}
+
+#header h2 {
+  margin: -3px 0px 0px 20px;
+  font-family: Officina, Calibri, Arial;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+p {
+  margin: 0px 0px 15px 0px;
+  color: #4a4a4a;
+  font-weight: normal;
+  font-family: Arial,sans-serif;
+}
+
+path.domain {
+  stroke-width: 0px;
+}
+
+g.x.axis path.domain, g.x.axis g.tick.major line, g.x.axis g.tick line {
+  stroke: #eee;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.axis path, .axis line {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #eee;
+  stroke-width: 1px;
+}
+
+.axis2 path, .axis2 line {
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.axis2 line {
+  stroke: #eee;
+  stroke-width: 1px;
+}
+
+g.group text, g.tick text, .x.axis text {
+  font-family: Officina, Calibri, Arial;
+  font-size: 14px;
+}
+
+#buttons {
+  margin: 10px 5px 0px 0px;
+  padding: 0px;
+  float: right;
+}
+
+.button {
+  display: inline-block;
+  margin: 0px;
+  padding: 2px 5px;
+  line-height: 20px;
+  text-align: center;
+  font-family: Officina, Calibri, Arial;
+  font-size: 14px;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #E30010;
+  margin-right: -5px;
+}
+
+#buttons .selected {
+  background: #ff0000;
+  color: #fff;
+}
+
+.button:hover {
+  background:#ff0000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#header {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #E11B17;
+  border-width: 2px 0px 0px 0px;
+}
+
+#block {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  height: 25px;
+  width: 10px;
+  background: #E11B17;
+}
+
+
+g.group text {
+  opacity: 0;
+}
+
+.scatter {
+  /*fill: #79d3f6;*/
+  /*stroke: #00a2d9;*/
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.trendline {
+  fill: none;
+  stroke: #7b2713;
+  stroke-width: 2px;
+  opacity: 1;
+}
+
+div.tooltip {
+  position: absolute;
+  pointer-events: none;
+  margin: 0px;
+  padding: 7px;
+  background: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  opacity: 0;
+  display: none;
+}
+
+.label {
+  /*display: none;*/
+}
+
+
+div.tooltip p, div.tooltip h2 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+  line-height: 1.2rem;
+  color: #000;
+  text-align: left;
+
+  font-family: Officina, Calibri, Arial;
+  font-size: 13px;
+}
+
+div.tooltip h2 {
+  margin: 0px;
+  padding: 0px 0px 5px 0px;
+  font-size: 14px;
+}
+
+#chart {
+  margin: 0px;
+  padding: 0px 0px 0px 20px;
+}
+
+#source {
+  margin: 0px 0px 0px 20px;
+  padding: 0px;
+  font-family: Officina, Calibri, Arial;
+  font-size: 14px;
+  color: #000;
+}
+
+.footnote{
+
+    font-family: Officina, Calibri, Arial;
+  font-size: 12px;
+}
+
+#select {
+  margin: 5px 0px 0px 20px;
+}
+
+@-moz-document url-prefix() {
+.t-column {
+  margin: 0px -4px 0px 0px;
+}
+}
+
+.buttonsY {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.buttonsX {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="content">
+
+  	<div id="header">
+		<div id="block"></div>
+    <h1>Comparing Aid to Syrian refugees with percentage of refugee population</h1>
+    <h2>Subtitle</h2>
+
+    <!-- <svg id="headerSVG" width="595" height="40"> -->
+  	</div>
+
+	<div id="container">
+
+		<div id="chart"></div>
+		<!-- <p id="source">Sources: OECD; Economist Intelligence Unit</p> -->
+
+	</div>
+
+</div>
+
+<script type="text/javascript" src="chart.js"></script>
+
+</body>
+<script type="text/javascript" src="js/infographic_mobile.js"></script>
+</html>
